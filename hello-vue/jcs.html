@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div id="app">
+      <!--右击事件，并阻止默认事件发生-->
+      <button v-on:contextmenu.prevent="num++">增加一个</button><br />
+      <!--右击事件，不阻止默认事件发生-->
+      <button v-on:contextmenu="decrement($event)">减少一个</button><br />
+      <h1>有{{num}}个女神迷恋季哥</h1>
+
+      <!--按键修饰符-->
+      <!-- 只有在 `keyCode` 是 13 时调用 `vm.submit()` -->
+      <form action="for.html">
+          <input v-on:keyup.13="submit" />
+          <input v-on:keyup.enter="submit" />
+          <input @keyup.enter="submit" />
+      </form>
+  </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el:"#app",
+        data:{
+            num:100
+        },
+        methods:{
+            decrement(ev){
+                // ev.preventDefault();
+                this.num--;
+            }
+        }
+    });
+</script>
+</html>

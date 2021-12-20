@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="num" /><button v-on:click="num++">点我</button><br />
+        <button v-on:click="add">加</button><br />
+        <h2>
+<!--            {{name}}，非常帅!!!-->
+            {{name}},非常帅!!有{{num}}给女神为他着迷。
+        </h2><br />
+        v-text<span v-text="hello"></span><br/>
+        v-html<span v-html="hello"></span><br/>
+        <input type="checkbox" v-model="language" value="java" />java<br/>
+        <input type="checkbox" v-model="language" value="c++" />c++<br/>
+        <input type="checkbox" v-model="language" value="javascript" />javascript<br/>
+        你选择了:{{language.join(',')}}
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js" ></script>
+<script>
+    // 创建vue实例
+    var app = new Vue({
+        el:"#app", // el即element，该vue实例要渲染的页面元素
+        data:{ // 渲染页面需要的数据
+            // name: "聪哥哥"
+            name: "哥哥",
+            num: 5,
+            hello:"<h2>1111</h2>",
+            language:[]
+        },
+        methods:{
+            add:function () {
+                this.num++;
+            }
+        },
+        // created:function () {
+        //     this.num=100;
+        // },
+        mounted:function () {
+            this.num=200;
+            console.log(this);
+        }
+
+    });
+
+</script>
+</html>

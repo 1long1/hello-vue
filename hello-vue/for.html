@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+
+        <ul>
+<!--            &lt;!&ndash;便利数组&ndash;&gt;-->
+<!--            <li v-for="user in users">-->
+<!--                {{user.name}} - {{user.gender}} - {{user.age}}-->
+<!--            </li>-->
+<!--            &lt;!&ndash;数组角标&ndash;&gt;-->
+<!--            <li v-for="(user,index) in users">-->
+<!--                {{index + 1}}.{user.name}} - {{user.gender}} - {{user.age}}-->
+<!--            </li>-->
+
+            <!--便利对象-->
+<!--            <li v-for="(value,key,index) in user">-->
+<!--                {{index+1}}.{{key}} - {{value}}-->
+<!--            </li>-->
+
+            <!--v-if和v-for结合,v-for优先级更高-->
+<!--            <li v-for="(user,index) in users" v-if="user.gender == '女'">-->
+<!--                {{index + 1}}.{{user.name}} - {{user.gender}} - {{user.age}}-->
+<!--            </li>-->
+
+            <!--key-->
+            <li v-for="(item,index) in items" :key=index></li>
+        </ul>
+
+        <!--v-if和v-show-->
+<!--        <button v-on:click="show = !show">点我呀</button><br />-->
+<!--        <h1 v-if="show">-->
+<!--            看到我啦？！-->
+<!--        </h1>-->
+<!--        <h1 v-show="show">-->
+<!--            看到我啦？！show-->
+<!--        </h1>-->
+
+        <!--v-if和v-else-->
+        <button v-on:click="random=Math.random()">点我呀</button><span>{{random}}</span>
+        <h1 v-if="random >= 0.75">
+            看到我啦？！if
+        </h1>
+        <h1 v-else-if="random > 0.5">
+            看到我啦？！if 0.5
+        </h1>
+        <h1 v-else-if="random > 0.25">
+            看到我啦？！if 0.5
+        </h1>
+        <h1 v-else>
+            看到我啦？！else
+        </h1>
+
+        <div v-bind:class="{activeClass:isActive}"></div>
+        <div v-bind:class="errorClass"></div>
+
+        <div v-bind:style="[baseStyles,overridingStyles]">qqqqq</div>
+
+        <div v-bind:style="{color: color}">eeeeee</div>
+        生日:{{
+            new Date(birthday).getFullYear()+'-'+new Date(birthday).getMonth()+'-'+new Date(birthday).getDate()
+        }}
+        新生日:{{birth}}<br />
+        <input type="text" v-model="message">
+    </div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el:"#app",
+        data:{
+            /*遍历数组*/
+            // users:[
+            //     {name:'季',gender:'男',age:21},
+            //     {name:'羽',gender:'男',age:18},
+            //     {name:'轩',gender:'女',age:20},
+            // ],
+
+            /*遍历对象*/
+            // user:{name:'季',gender:'男',age:18},
+
+            /*v-if和v-show*/
+            // show: true,
+
+            /*v-if和v-else*/
+            random: 1,
+            activeClass: 'active',
+            errorClass: ['text-danger', 'text-error'],
+            isActive:true,
+            hasError:false,
+            baseStyles: {'background-color': 'red'},
+            overridingStyles: {border: '1px solid black',width:200+'px',height:50+'px'},
+            color:'red',
+            birthday:142903211211,
+            message:"111"
+        },
+        computed:{
+            birth(){
+                const d = new Date(this.birthday);
+                return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()
+            }
+        },
+        watch:{
+            message(newVal, oldVal){
+                console.log(newVal, oldVal);
+            }
+        }
+    });
+</script>
+</body>
+</html>
